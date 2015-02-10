@@ -12,3 +12,16 @@ if (file.exists(localfilepath)){
 
 # Print the file time
 file.info(localfilepath)$ctime
+
+## File Preparation
+# Load secondary files
+activitylabels <- read.csv("./activity_labels.txt",header=F,sep=" ",col.names=c("id","activitylabel"))
+features <- read.csv("./features.txt",header=F,sep=" ",col.names=c("id","featurelabel"))
+
+# Prepare the test file
+subjecttest <- read.table("./test/subject_test.txt",header=F,col.names="subjectid")
+xtest <- read.table("./test/X_test.txt",header=F,col.names=tolower(gsub("[\\,\\(\\)\\.\\-]","",features[,2])))
+ytest <- read.table("./test/y_test.txt",header=F,col.names="activityid")
+test <- cbind("test",subjecttest,ytest,xtest)
+colnames(test)[1] <- "filesource"
+test[1:5,1:7]
