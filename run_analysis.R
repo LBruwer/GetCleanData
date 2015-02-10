@@ -37,3 +37,11 @@ train[1:5,1:7]
 # Merge the two files
 tidy <- rbind(test,train)
 tidy[c(1:5,8000:8004),1:7]
+
+## Extract the Mean and the Standard Deviation
+tidyms <- tidy[,c(1:3,grep("mean.*\\(\\)",features[,2],ignore.case=T)+3,
+        grep("std\\(\\)",features[,2],ignore.case=T)+3)]
+
+# Add English version of activity label into data frame
+tidyms <- merge(tidyms, activitylabels, by.x="activityid", by.y="id")
+tidyms[c(1:5,8000:8004),c(1:7,83)]
