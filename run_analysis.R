@@ -52,15 +52,7 @@ tidysummary[,4] <- as.numeric(tidysummary[,4])
 final <- dcast(tidysummary, subjectid + activitylabel ~ variable, fun.aggregate=mean)
 final <- cbind(final[,-(3:4)])
 
-# Create codebook (commented out because only used in prep work)
-# write.csv(colnames(final),"./codebook.csv")
 
-# File export
-write.csv(final,"./tidy data set.csv")
-
-# Clean up
-rm(activitylabels, features, subjecttest, subjecttrain, test, tidyms,
-   tidysummary, train, xtest, xtrain, ytest, ytrain)
 
 
 
