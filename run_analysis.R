@@ -25,3 +25,11 @@ ytest <- read.table("./test/y_test.txt",header=F,col.names="activityid")
 test <- cbind("test",subjecttest,ytest,xtest)
 colnames(test)[1] <- "filesource"
 test[1:5,1:7]
+
+# Prepare the train file
+subjecttrain <- read.table("./train/subject_train.txt",header=F,col.names="subjectid")
+xtrain <- read.table("./train/X_train.txt",header=F,col.names=tolower(gsub("[\\,\\(\\)\\.\\-]","",features[,2])))
+ytrain <- read.table("./train/y_train.txt",header=F,col.names="activityid")
+train <- cbind("train",subjecttrain,ytrain,xtrain)
+colnames(train)[1] <- "filesource"
+train[1:5,1:7]
