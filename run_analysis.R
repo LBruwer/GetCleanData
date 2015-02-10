@@ -33,3 +33,7 @@ ytrain <- read.table("./train/y_train.txt",header=F,col.names="activityid")
 train <- cbind("train",subjecttrain,ytrain,xtrain)
 colnames(train)[1] <- "filesource"
 train[1:5,1:7]
+
+# Merge the two files
+tidy <- rbind(test,train)
+tidy[c(1:5,8000:8004),1:7]
