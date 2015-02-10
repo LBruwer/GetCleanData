@@ -45,3 +45,9 @@ tidyms <- tidy[,c(1:3,grep("mean.*\\(\\)",features[,2],ignore.case=T)+3,
 # Add English version of activity label into data frame
 tidyms <- merge(tidyms, activitylabels, by.x="activityid", by.y="id")
 tidyms[c(1:5,8000:8004),c(1:7,83)]
+
+## Final tidy data set with 180 observations
+tidysummary <- melt(tidyms, id.vars=c("subjectid", "activitylabel"))
+tidysummary[,4] <- as.numeric(tidysummary[,4])
+final <- dcast(tidysummary, subjectid + activitylabel ~ variable, fun.aggregate=mean)
+final <- cbind(final[,-(3:4)])
